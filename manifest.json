@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "SABconnectV3",
-	"version": "0.7",
+	"version": "0.8",
 	"description": "SABnzbd extension for Google Chrome (for Manifest V3).",
 	"minimum_chrome_version": "88.0",
 	"background": {
@@ -53,7 +53,8 @@
 		"notifications",
 		"contextMenus",
 		"storage",
-		"scripting"
+		"scripting",
+		"activeTab"
 	],
 	"host_permissions": [
 		"*://*.nzbclub.com/*",
@@ -72,13 +73,7 @@
 		"*://*.yubse.com/*",
 		"*://*.omgwtfnzbs.org/*",
 		"*://*.nzb-rss.com/*",
-		"*://*.usenet4ever.info/*",
-		"http://localhost:*/*",
-		"https://localhost:*/*",
-		"http://127.0.0.1:*/*",
-		"https://127.0.0.1:*/*",
-		"http://*/*",
-		"https://*/*"
+		"*://*.usenet4ever.info/*"
 	],
 	"content_scripts": [
 		{
