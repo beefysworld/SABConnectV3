@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="css/popup.css" />
+<script type="text/javascript" src="third_party/jquery/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="third_party/jquery/jquery-ui-1.8.20.sortable.min.js"></script>
+<script type="text/javascript" src="third_party/jquery/jquery.urldecoder.min.js"></script>
+<script type="text/javascript" src="third_party/fancy-settings/lib/store.js"></script>
+<script type="text/javascript" src="scripts/profile.js"></script>
+<script type="text/javascript" src="scripts/pages/common.js"></script>
+
+<!-- jqplot scripts commented out since graph is hidden
+<script type="text/javascript" src="third_party/jqplot/jquery.jqplot.js"></script>
+<script type="text/javascript" src="third_party/jqplot/jqplot.barRenderer.js"></script>
+<script type="text/javascript" src="third_party/jqplot/jqplot.pointLabels.js"></script>
+<link rel="stylesheet" type="text/css" href="third_party/jqplot/jquery.jqplot.css" />
+-->
+
+<script type="text/javascript" src="scripts/pages/popup-templates.js"></script>
+
+</head>
+<body>
+
+<div id="sabInfo">
+	<div id="sab-errors"></div>
+
+	<div>
+		Active Profile: <select id="profiles"></select>
+	</div>
+
+	<div class="col-left">
+		<span id="sab-status"></span><br />
+		<div id="sab-timeleft"></div>
+	</div>
+
+	<div class="col-right">
+		<div id="sab-speed"></div>
+		<span id="sab-sizeleft"></span>
+	</div>
+	<div class="float-fix"></div>
+
+	<div id="graph"></div>
+
+	<ul id="sab-queue"></ul>
+</div>
+
+<div class="menu">
+	<hr />
+	<div id="open_sabnzbd">Open SABnzbd</div>
+	<hr />
+	<div id="extension_settings">Extension Settings</div>
+	<hr />
+	<div id="refresh">Refresh</div>
+	<hr />
+	<div>
+		Max Speed: <input id="speed-input" type="text"/> % <button id="set-speed">Set</button>
+	</div>
+    <hr />
+    <div id="user_category" style="display:none;">
+        Override Category: <select id="userCategory"></select>
+    </div>
+</div>
+<script type="text/javascript" src="scripts/pages/popup.js"></script>
+</body>
+</html>

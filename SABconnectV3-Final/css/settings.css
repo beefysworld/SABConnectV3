@@ -1,0 +1,21 @@
+#connection-status
+{
+	display: inline;
+	margin-left: 30px;
+	padding: 5px 25px;
+}
+
+.connection-status-success
+{
+	background-color: #41AD37;
+}
+
+.connection-status-failure
+{
+	background-color: #FF0000;
+}
+
+.setting.element.button
+{
+	display: inline;
+}

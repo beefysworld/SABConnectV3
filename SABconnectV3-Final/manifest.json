@@ -1,0 +1,183 @@
+{
+	"manifest_version": 3,
+	"name": "SABconnectV3",
+	"version": "0.8",
+	"description": "SABnzbd extension for Google Chrome (for Manifest V3).",
+	"minimum_chrome_version": "88.0",
+	"background": {
+		"service_worker": "scripts/pages/service_worker.js"
+	},
+	"options_page": "simple-settings.html",
+	"action": {
+		"default_icon": "images/content_icon.png",
+		"default_title": "SABconnectV3",
+		"default_popup": "popup.html"
+	},
+	"icons": {
+		"16": "images/content_icon.png",
+		"48": "images/sab_48.png",
+		"128": "images/sab_128.png"
+	},
+	"web_accessible_resources": [
+		{
+			"resources": [
+				"images/content_icon.png",
+				"images/content_icon_error.png",
+				"images/content_icon_fetching.png",
+				"images/content_icon_success.png",
+				"css/common.css"
+			],
+			"matches": [
+				"*://*.nzbclub.com/*",
+				"*://*.bintube.com/*",
+				"*://*.binsearch.info/*",
+				"*://*.binsearch.net/*",
+				"*://*.binsearch.co.uk/*",
+				"*://*.binsear.ch/*",
+				"*://*.nzbindex.com/*",
+				"*://*.nzbindex.nl/*",
+				"*://*.fanzub.com/*",
+				"*://*.animezb.com/*",
+				"*://animenzb.com/*",
+				"*://*.animenzb.com/*",
+				"*://*.dognzb.cr/*",
+				"*://*.yubse.com/*",
+				"*://*.omgwtfnzbs.org/*",
+				"*://*.nzb-rss.com/*",
+				"*://*.usenet4ever.info/*"
+			]
+		}
+	],
+	"permissions": [
+		"tabs",
+		"notifications",
+		"contextMenus",
+		"storage",
+		"scripting",
+		"activeTab"
+	],
+	"host_permissions": [
+		"*://*.nzbclub.com/*",
+		"*://*.bintube.com/*",
+		"*://*.binsearch.info/*",
+		"*://*.binsearch.net/*",
+		"*://*.binsearch.co.uk/*",
+		"*://*.binsear.ch/*",
+		"*://*.nzbindex.com/*",
+		"*://*.nzbindex.nl/*",
+		"*://*.fanzub.com/*",
+		"*://*.animezb.com/*",
+		"*://animenzb.com/*",
+		"*://*.animenzb.com/*",
+		"*://*.dognzb.cr/*",
+		"*://*.yubse.com/*",
+		"*://*.omgwtfnzbs.org/*",
+		"*://*.nzb-rss.com/*",
+		"*://*.usenet4ever.info/*"
+	],
+	"content_scripts": [
+		{
+			"matches": [
+				"*://*.nzbclub.com/*",
+				"*://*.bintube.com/*",
+				"*://*.binsearch.info/*",
+				"*://*.binsearch.net/*",
+				"*://*.binsearch.co.uk/*",
+				"*://*.binsear.ch/*",
+				"*://*.nzbindex.com/*",
+				"*://*.nzbindex.nl/*",
+				"*://*.fanzub.com/*",
+				"*://*.animezb.com/*",
+				"*://animenzb.com/*",
+				"*://*.animenzb.com/*",
+				"*://*.dognzb.cr/*",
+				"*://*.yubse.com/*",
+				"*://*.omgwtfnzbs.org/*",
+				"*://*.nzb-rss.com/*",
+				"*://*.usenet4ever.info/*"
+			],
+			"js": [
+				"third_party/jquery/jquery-1.12.4.min.js",
+				"scripts/content/common.js",
+				"third_party/webtoolkit/webtoolkit.base64.js"
+			],
+			"all_frames": true
+		},
+
+		{
+			"matches": [ "*://*.nzbclub.com/*" ],
+			"js": [	"scripts/content/nzbclub.js" ],
+			"all_frames": true
+		},
+		{
+			"matches": [ "*://*.bintube.com/*" ],
+			"js": [ "scripts/content/bintube.js" ],
+			"all_frames": true
+		},
+		{
+			"matches": [
+				"*://*.binsearch.info/*",
+				"*://*.binsearch.net/*",
+				"*://*.binsearch.co.uk/*",
+				"*://*.binsear.ch/*"
+			],
+			"js": [	"scripts/content/binsearch.js" ],
+			"all_frames": true
+		},
+		{
+			"matches" : [
+				"*://*.nzbindex.com/*",
+				"*://*.nzbindex.nl/*"
+			],
+			"js": [	"scripts/content/nzbindex.js" ],
+			"all_frames": true
+		},
+		{
+			"matches": [ "*://*.fanzub.com/*" ],
+			"js": [	"scripts/content/fanzub.js"	],
+			"all_frames": true
+		},
+		{
+			"matches": [ "*://*.animezb.com/*" ],
+			"js": [	"scripts/content/animezb.js" ],
+			"all_frames": true
+		},
+		{
+			"matches": [
+				"*://animenzb.com/*",
+				"*://*.animenzb.com/*"
+			],
+			"js": [ "scripts/content/animenzb.js" ],
+			"all_frames": true
+		},
+		{
+			"matches": [ "*://*.dognzb.cr/*" ],
+			"js": [	"scripts/content/dognzb.js"	],
+			"all_frames": true
+		},
+		{
+			"matches": [ "*://*.yubse.com/*" ],
+			"js": [ "scripts/content/yubse.js" ],
+			"all_frames": true
+		},
+		{
+			"matches": [ "*://omgwtfnzbs.org/*" ],
+			"js": [	"scripts/content/omgwtfnzbs.js" ],
+			"all_frames": true
+		},
+		{
+			"matches": [ "*://*.nzb-rss.com/*" ],
+			"js": [	"scripts/content/nzbrss.js" ],
+			"all_frames": true
+		},
+		{
+            "all_frames": true,
+            "js": [ "scripts/content/usenet4ever.js" ],
+            "matches": [ "*://*.usenet4ever.info/*" ]
+        }
+
+	],
+	"content_security_policy": {
+		"extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'"
+	}
+}
