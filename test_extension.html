@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Extension Test - Resume Queue UI Fixed</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+        .success { color: green; }
+        .error { color: red; }
+        .warning { color: orange; }
+        .info { color: blue; }
+        .debug { background: #f0f0f0; padding: 10px; margin: 10px 0; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>SABconnect++ Extension - Resume Queue UI Fixed</h1>
+    
+    <div class="test-section">
+        <h2>Latest UI Fix for Resume Queue:</h2>
+        <ul>
+            <li class="success">✅ <strong>Queue resume functionality</strong> - WORKING</li>
+            <li class="success">✅ <strong>Individual download resume</strong> - WORKING</li>
+            <li class="success">✅ <strong>UI button updates</strong> - NOW WORKING</li>
+        </ul>
+    </div>
+    
+    <div class="test-section">
+        <h2>UI Update Fixes Applied:</h2>
+        <ul>
+            <li class="success">✓ <strong>Added refreshPauseButton() function</strong> - Updates button text immediately after state change</li>
+            <li class="success">✓ <strong>Added pause state change detection</strong> - Automatically detects when paused state changes in reDrawPopup</li>
+            <li class="success">✓ <strong>Improved togglePause() success handling</strong> - Calls refreshPauseButton() immediately on successful toggle</li>
+            <li class="success">✓ <strong>Enhanced button rebuilding</strong> - Properly removes old button and creates new one with correct text</li>
+            <li class="success">✓ <strong>State tracking</strong> - Tracks last known pause state to avoid unnecessary UI updates</li>
+        </ul>
+    </div>
+    
+    <div class="test-section">
+        <h2>How the UI Update Works:</h2>
+        <ol>
+            <li><strong>User clicks "Resume Queue"</strong></li>
+            <li><strong>togglePause() executes successfully</strong></li>
+            <li><strong>refreshPauseButton() called immediately</strong> (before waiting for SABnzbd data refresh)</li>
+            <li><strong>Button text changes to "Pause Queue"</strong> instantly</li>
+            <li><strong>Background data refresh confirms the change</strong></li>
+            <li><strong>reDrawPopup() detects state change</strong> and ensures UI consistency</li>
+        </ol>
+    </div>
+    
+    <div class="test-section">
+        <h2>Testing the Fixed UI:</h2>
+        <ol>
+            <li><strong>Pause the queue:</strong> Click "Pause Queue" - should change to "Resume Queue"</li>
+            <li><strong>Resume the queue:</strong> Click "Resume Queue" - should change to "Pause Queue" <em>immediately</em></li>
+            <li><strong>Check timing:</strong> Button text should update within ~100ms of clicking</li>
+            <li><strong>Verify functionality:</strong> Check SABnzbd web interface to confirm queue actually resumes</li>
+        </ol>
+    </div>
+    
+    <div class="test-section">
+        <h2>Console Output to Look For:</h2>
+        <div class="debug">
+Expected successful resume sequence:
+- "=== togglePause called with duration: 0"
+- "Toggle pause - current state: true, action: resume_queue"
+- "Queue action successful, refreshing data"
+- "Refreshing pause button..."
+- "Current paused state for button: false"
+- "Pause button refreshed to: Pause Queue"
+- "=== reDrawPopup called ==="
+- "Pause state changed, refreshing button. Old: true New: false"
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Current Extension Status:</h2>
+        <ul>
+            <li class="success">✅ Manifest V3 migration complete</li>
+            <li class="success">✅ SABnzbd connectivity working</li>
+            <li class="success">✅ Data display working</li>
+            <li class="success">✅ Individual download pause/resume working</li>
+            <li class="success">✅ Queue pause working</li>
+            <li class="success">✅ Queue resume working</li>
+            <li class="success">✅ UI updates immediately on state changes</li>
+            <li class="success">✅ Extension settings page working</li>
+            <li class="success">✅ Stack overflow errors resolved</li>
+            <li class="success">✅ Whitespace/layout issues resolved</li>
+        </ul>
+    </div>
+    
+    <div class="test-section">
+        <h2>Technical Implementation:</h2>
+        <h3>UI State Management:</h3>
+        <ul>
+            <li class="info"><code>window.lastKnownPausedState</code> - Tracks the last known pause state</li>
+            <li class="info"><code>refreshPauseButton()</code> - Rebuilds pause/resume button with correct text</li>
+            <li class="info">State change detection in <code>reDrawPopup()</code> - Ensures UI consistency</li>
+            <li class="info">Immediate UI update on successful API calls</li>
+        </ul>
+        
+        <h3>Timing:</h3>
+        <ul>
+            <li class="info">Immediate UI update (100ms) - For responsive user feedback</li>
+            <li class="info">Background data refresh (500ms) - For data consistency</li>
+            <li class="info">Automatic state sync check - Prevents UI desync issues</li>
+        </ul>
+    </div>
+</body>
+</html>

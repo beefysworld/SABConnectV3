@@ -155,6 +155,7 @@ li.highlight {
 #graph {
 	height: 75px;
 	width: 220px;
+	display: none; /* Hidden by default to prevent whitespace */
 }
 
 #errors-container {

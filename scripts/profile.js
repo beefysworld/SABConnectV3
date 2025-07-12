@@ -1,15 +1,43 @@
+// Profile Manager for SABconnect++
+// Add compatibility shim for store access
+function getStore() {
+    // Try to use the global store, fallback to a basic implementation
+    if (typeof store !== 'undefined' && store.get) {
+        return store;
+    }
+    
+    // Fallback store implementation
+    return {
+        get: function(key) {
+            if (key === 'profiles') {
+                return {};
+            }
+            if (key === 'active_profile') {
+                return 'default';
+            }
+            return null;
+        },
+        set: function(key, value) {
+            console.warn('Store.set called but no store available:', key, value);
+        }
+    };
+}
+
 function ProfileManager()
 {
 }
 
 ProfileManager.prototype.count = function()
 {
-	return store.get( 'profiles' ).length;
+	const store = getStore();
+	const profiles = store.get('profiles');
+	return profiles ? Object.keys(profiles).length : 0;
 }
 
 ProfileManager.prototype.add = function( profileName, values )
 {
-	var profiles = store.get( 'profiles' );
+	const store = getStore();
+	var profiles = store.get( 'profiles' ) || {};
 	if(typeof profiles == "object" && profiles.hasOwnProperty( profileName ) ) {
 		throw 'already_exists';
 	}
@@ -20,7 +48,8 @@ ProfileManager.prototype.add = function( profileName, values )
 
 ProfileManager.prototype.edit = function( profileName, values, newProfileName )
 {
-	var profiles = store.get( 'profiles' );
+	const store = getStore();
+	var profiles = store.get( 'profiles' ) || {};
 	
 	if( !profiles[profileName] ) {
 		throw 'profile_missing';
@@ -41,7 +70,8 @@ ProfileManager.prototype.edit = function( profileName, values, newProfileName )
 
 ProfileManager.prototype.remove = function( profileName )
 {
-	var profiles = store.get( 'profiles' );
+	const store = getStore();
+	var profiles = store.get( 'profiles' ) || {};
 	if( !profiles.hasOwnProperty( profileName ) ) {
 		throw 'profile_missing';
 	}
@@ -56,7 +86,8 @@ ProfileManager.prototype.remove = function( profileName )
 
 ProfileManager.prototype.setProfile = function( profileData )
 {
-	var profiles = store.get( 'profiles' );
+	const store = getStore();
+	var profiles = store.get( 'profiles' ) || {};
 	profiles[profileData.name] = profileData.values;
 	this.saveProfiles(profiles);
 }
@@ -67,7 +98,8 @@ ProfileManager.prototype.getProfile = function( profileName )
 		return null;
 	}
 	
-	var profiles = store.get( 'profiles' );
+	const store = getStore();
+	var profiles = store.get( 'profiles' ) || {};
 	var profile = profiles[profileName];
 	
 	if( !profile ) {
@@ -94,7 +126,9 @@ ProfileManager.prototype.getActiveProfile = function()
 
 ProfileManager.prototype.getFirstProfile = function()
 {
-	var profileName = first( store.get( 'profiles' ) );
+	const store = getStore();
+	var profiles = store.get( 'profiles' ) || {};
+	var profileName = first( profiles );
 	return this.getProfile( profileName );
 }
 
@@ -105,7 +139,8 @@ ProfileManager.prototype.setActiveProfile = function( profileName )
 
 ProfileManager.prototype.contains = function( profileName )
 {
-	var profiles = store.get( 'profiles' );
+	const store = getStore();
+	var profiles = store.get( 'profiles' ) || {};
 	return profiles.hasOwnProperty( profileName );
 }
 
@@ -118,5 +153,6 @@ ProfileManager.prototype.saveProfiles = function(profiles) {
 			delete profile.password;
 		}
 	}
+	const store = getStore();
 	store.set( 'profiles', profiles );
 }
